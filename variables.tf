@@ -68,5 +68,5 @@ variable "kv_name" {
 
 variable "kv_secretname" {
   description = "Azure Key Valut Secret name"
-  default     = "pw4ggvdemo"
+  default     = "pw4ggdemo"
 }

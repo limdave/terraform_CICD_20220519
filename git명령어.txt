@@ -1,0 +1,20 @@
+$ git init // 로컬 저장소 생성 
+$ git status // 올라갈 파일 있는지 현재 폴더의 파일들 확인 
+// 둘 중 하나 선택 
+$ git add . // 로컬 저장소에 전체 파일 업로드 
+$ git add [파일명/폴더명] // 로컬 저장소에 특정 파일/폴더 업로드 
+$ git commit -m "[푸쉬 메시지]" // push시 원하는 메시지 등록 및 commit 
+$ git remote add origin [복사해둔 레포지토리 주소] 
+$ git remote -v // 로컬 저장소가 원격 저장소로 연결
+# git branch -M main  
+$ git push origin main // 아까 커밋한 파일들 원격저장소에 업로드
+
+//오류가 발생해서(github에 readme.md 파일을 만들었기에) 강제 업로드
+error: failed to push some refs to 'https://github.com/limdave/terraform_CICD_20220519.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PS C:\Dev2022\Terraform2022\github_actions> git push -f origin main
+출처: https://yeonyeon.tistory.com/50 [연로그]

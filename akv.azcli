@@ -2,7 +2,7 @@
 #LOCATION=koreacentral
 RESOURCE_GROUP=rg-gav2022-gslim
 LOCATION=eastus
-KEY_VAULT_NAME=kv4gslim
+KEY_VAULT_NAME=kv4limdave
 
 
 # Create a resource group
@@ -12,7 +12,13 @@ az group create --name $RESOURCE_GROUP --location $LOCATION
 az keyvault create --name $KEY_VAULT_NAME --resource-group "$RESOURCE_GROUP" --location $LOCATION
 
 # Add a secret to Key Vault
-az keyvault secret set --vault-name $KEY_VAULT_NAME --name pw4ggvdemo --value P@ssW0rd4vm
+az keyvault secret set --vault-name $KEY_VAULT_NAME --name pw4ggdemo --value "dlarhd1234!"
 
 # Retrieve a secret from Key Vault
-az keyvault secret show --name pw4ggvdemo --vault-name $KEY_VAULT_NAME --query "value"
+az keyvault secret show --name pw4ggdemo --vault-name $KEY_VAULT_NAME --query "value"
+
+#-------------------------
+az keyvault show --subscription "2-85a7-4991-a167-5a75a905faf3" -g "$RESOURCE_GROUP" -n kv4gslim2
+az keyvault list-deleted --subscription "2-85a7-4991-a167-5a75a905faf3" --resource-type vault
+az keyvault recover --subscription "2-85a7-4991-a167-5a75a905faf3" -n kv4gslim
+az keyvault delete --subscription {SUBSCRIPTION ID} -g {RESOURCE GROUP} -n {VAULT NAME}
