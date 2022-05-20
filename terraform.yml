@@ -27,17 +27,19 @@ jobs:
         shell: bash
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
+    # Checkout the repository to the GitHub Actions runner.체크 아웃은 현재 구성을 체크아웃합니다.
     - name: Checkout
       uses: actions/checkout@v2
 
+    # Terraform 형식 은 구성이 올바르게 형식화되었는지 확인합니다.
     - name: 'Terraform Format'
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'fmt'
         tf_actions_working_dir: "./terraform"
-        
+
+    # Terraform Init 는 GitHub 작업 워크플로에서 사용되는 구성을 초기화합니다.    
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-actions@master
       with:
@@ -45,13 +47,15 @@ jobs:
         tf_actions_subcommand: 'init'
         tf_actions_working_dir: "./terraform"
 
+    # Terraform Validate 는 GitHub 작업 워크플로에 사용된 구성의 유효성을 검사합니다.
     - name: 'Terraform Validate'
       uses: hashicorp/terraform-github-actions@master
       with:
         tf_actions_version: 0.14.8
         tf_actions_subcommand: 'validate'
         tf_actions_working_dir: "./terraform"
-        
+
+    # Terraform 계획 은 Terraform 계획 을 생성합니다. 이 단계는 pull 요청에서만 실행됩니다. PR은 계획을 생성합니다. PR이 병합되면 해당 계획이 적용됩니다.     
     - name: 'Terraform Plan'
       uses: hashicorp/terraform-github-actions@master
       with:
@@ -59,6 +63,7 @@ jobs:
         tf_actions_subcommand: 'plan'
         tf_actions_working_dir: "./terraform"
 
+    # Terraform Apply 가 구성을 적용합니다. 이 단계는 커밋이 main에 푸시될 때만 실행됩니다
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main'
       uses: hashicorp/terraform-github-actions@master
