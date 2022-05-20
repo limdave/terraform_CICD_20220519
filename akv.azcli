@@ -18,7 +18,7 @@ az keyvault secret set --vault-name $KEY_VAULT_NAME --name pw4ggdemo --value "dl
 az keyvault secret show --name pw4ggdemo --vault-name $KEY_VAULT_NAME --query "value"
 
 #-------------------------
-az keyvault show --subscription "2-85a7-4991-a167-5a75a905faf3" -g "$RESOURCE_GROUP" -n kv4gslim2
+az keyvault show --subscription "2-85a7-4991-a167-5a75a905faf3" -g "$RESOURCE_GROUP" -n kv4gslim
 az keyvault list-deleted --subscription "2-85a7-4991-a167-5a75a905faf3" --resource-type vault
 az keyvault recover --subscription "2-85a7-4991-a167-5a75a905faf3" -n kv4gslim
 az keyvault delete --subscription {SUBSCRIPTION ID} -g {RESOURCE GROUP} -n {VAULT NAME}

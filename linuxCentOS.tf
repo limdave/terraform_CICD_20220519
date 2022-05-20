@@ -10,9 +10,9 @@ terraform {
     }
   }
     # Use backed locally first. Commenting out this after configuring remote backend.
-    backend "local" {
-      path = "./terraform.tfstate"
-    } 
+    #backend "local" {
+    #  path = "./terraform.tfstate"
+    #} 
 }
 provider "azurerm" {
   features {}
