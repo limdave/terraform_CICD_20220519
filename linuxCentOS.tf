@@ -36,9 +36,9 @@ resource "azurerm_resource_group" "ggResourcegroup" {
     location = var.location
     #tags = var.default_tags
     tags    = {
-        envrionment = "test"
+        Envrionment = "dev"
         datetime = "${local.current_time}"
-        owner   = "gslim"
+        Creator   = "gslim"
     }
 }
 

@@ -14,9 +14,9 @@ variable "default_tags" {
   description = "please define a tag name like date, role, environment and etc"
     type = map(string)
     default = {
-        envrionment = "test"
-        datetime = "2022.05.20 13:00",
-        owner   = "gslim"
+        Envrionment = "dev"
+        datetime  = "2022.05.20 13:00",
+        Creator   = "gslim"
     }
 }
 
