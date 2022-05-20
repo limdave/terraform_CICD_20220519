@@ -1,0 +1,92 @@
+# This is a basic workflow to help you get started with Actions
+# https://github.com/zer0big/GAV2022KR-ZerobigDemo/blob/main/.github/workflows/gav2022demo.yml
+
+name: 'terraform deploy to Azure'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch: #this attribute will enable the manual run to the pipeline
+  
+
+# Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+defaults:
+  run:
+    shell: bash
+env: 
+  ROOT_PATH: '${{github.workspace}}'
+  ARM_CLIENT_ID: ${{secrets.CLIENT_ID}}
+  ARM_CLIENT_SECRET: ${{secrets.CLIENT_SECRET}}
+  ARM_SUBSCRIPTION_ID: ${{secrets.SUBSCRIPTION_ID}}
+  ARM_TENANT_ID: ${{secrets.TENANT_ID}}
+
+jobs:
+  terraform:
+    name: 'terraform'
+    runs-on: ubuntu-latest
+ 
+    steps:    
+    - name: Checkout
+      uses: actions/checkout@v2     
+       
+    - name: Setup terraform
+      uses: hashicorp/setup-terraform@v1
+ 
+    - name: Terraform Format
+      id: fmt
+      run: terraform fmt
+      working-directory: ${{ env.ROOT_PATH }}
+         
+    - name: Terraform Init
+      id: init
+      run: terraform init
+      working-directory: ${{ env.ROOT_PATH }}
+       
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
+      working-directory: ${{ env.ROOT_PATH }}
+       
+    - name: Terraform Plan
+      id: plan   
+      run: terraform plan -out main.tfplan  
+      working-directory: ${{ env.ROOT_PATH }}
+ 
+    - name: Terraform Show
+      id: show   
+      run: terraform show -json main.tfplan > main.tfplan.json  
+ 
+   #this position compliance section
+       
+  terraform_apply:
+    name: 'terraform apply'
+    needs: [terraform]
+    environment: DEV
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2 
+   
+    - name: terraform Init
+      id: init
+      run: terraform init
+      working-directory: ${{ env.ROOT_PATH }}
+
+    - name: terraform Apply
+      run: terraform apply -auto-approve
+      id: apply
+      working-directory: ${{ env.ROOT_PATH }}
+
+    # - name: terraform destroy
+    #   run: terraform destroy -auto-approve
+    #   if: ${{inputs.tf_destroy}} == true
+    #   working-directory: ${{ env.ROOT_PATH }}
