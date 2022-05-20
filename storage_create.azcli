@@ -1,0 +1,14 @@
+# Declare Variables
+RESOURCE_GROUP=rg-gav2022-gslim
+STORAGE_ACCOUNT_NAME=stagav2022
+LOCATION=eastus
+CONTAINER_NAME=gav2022contain
+  
+# Create Resource Group
+az group create --name $RESOURCE_GROUP --location $LOCATION
+  
+# Create Storage Account
+az storage account create -n $STORAGE_ACCOUNT_NAME -g $RESOURCE_GROUP -l $LOCATION  --sku Standard_LRS
+
+# Create Storage Account blob
+az storage container create  --name $CONTAINER_NAME --account-name $STORAGE_ACCOUNT_NAME
