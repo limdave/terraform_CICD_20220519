@@ -15,7 +15,7 @@ variable "default_tags" {
     type = map(string)
     default = {
         envrionment = "test"
-        datetime = "2022.05.19 13:00",
+        datetime = "2022.05.20 13:00",
         owner   = "gslim"
     }
 }

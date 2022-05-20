@@ -59,6 +59,7 @@ resource "azurerm_subnet" "ggSubnet00" {
     resource_group_name  = azurerm_resource_group.ggResourcegroup.name
     virtual_network_name = azurerm_virtual_network.ggVnet01.name
     address_prefixes       = ["10.50.1.0/26"]
+    tags    = var.default_tags
 }
 
 # Create public IPs
